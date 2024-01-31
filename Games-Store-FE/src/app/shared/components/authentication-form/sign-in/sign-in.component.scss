@@ -1,0 +1,191 @@
+.layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--color-primary-background);
+  color: white;
+
+  .login-form {
+    width: 30%;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: var(--color-secondary);
+    .text-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logo {
+      width: 50px;
+      margin: 0 auto;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .form-field {
+        position: relative;
+        margin-top: 16px;
+
+        label {
+          padding: 8px;
+          top: 50%;
+          left: 0px;
+          position: absolute;
+          transform: translateY(-50%);
+          pointer-events: none;
+          color: #999;
+          transition: ease 0.25s;
+        }
+        input {
+          padding: 16px 8px;
+          border-radius: 5px;
+          border: 1px solid #999;
+          width: 100%;
+          height: 50%;
+          transition: ease 0.2s;
+          background-color: var(--color-secondary);
+          color: white;
+          font-size: 1rem;
+        }
+        input:focus {
+          border-color: white;
+          outline: none;
+        }
+        input:focus ~ label,
+        input:valid ~ label {
+          border: white;
+          font-size: 12px;
+          top: 0;
+          margin-left: 10px;
+          color: white;
+          background-color: var(--color-secondary);
+        }
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: #ffffff;
+        }
+        .valid-border {
+          border: 1px solid #db4437; /* Change this to the desired valid border color */
+        }
+      }
+      .form-valid {
+        height: 16px;
+        font-size: 10px;
+        color: #db4437;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        background-color: #71ac73;
+        cursor: auto;
+      }
+    }
+
+    .text {
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .text::before {
+      content: "";
+      width: 100%;
+      border: 1px solid white;
+    }
+    .text::after {
+      content: "";
+      width: 100%;
+      border: 1px solid white;
+    }
+
+    .text p {
+      margin: 0 10px;
+    }
+
+    $color-facebook: #1877f2;
+    $color-google: #db4437;
+    $color-steam: #171a21;
+    $color-xbox: #107c10;
+
+    .social-login-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .social-login {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        background-color: #ffffff;
+        cursor: pointer;
+
+        i {
+          color: #000000;
+          font-size: 20px;
+          border-radius: 50%;
+          padding: 10px;
+        }
+
+        &.fb i {
+          color: $color-facebook;
+        }
+
+        &.gg i {
+          color: $color-google;
+        }
+
+        &.steam i {
+          color: $color-steam;
+        }
+
+        &.xbox i {
+          color: $color-xbox;
+        }
+      }
+    }
+
+    .sign-up {
+      margin-top: 10px;
+      text-align: center;
+      .sign-up-btn {
+        background-color: #3498db;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+      }
+    }
+
+    .privacy-policy {
+      margin-top: 10px;
+      font-size: 12px;
+
+      a {
+        color: #3498db;
+        text-decoration: none;
+      }
+    }
+  }
+}

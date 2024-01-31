@@ -1,0 +1,30 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <label>
+        Name:
+        <input type="text" formControlName="name" />
+    </label>
+    <br />
+    <label>
+        Description:
+        <textarea formControlName="description"></textarea>
+    </label>
+    <br />
+    <label>
+        Price:
+        <input type="number" formControlName="price" />
+    </label>
+    <br />
+    <label>
+        Release Date:
+        <input type="date" formControlName="releaseDate" />
+    </label>
+    <br />
+    <label>
+        Status:
+        <input type="checkbox" formControlName="status" />
+    </label>
+    <input type="file" (change)="onFileSelected($event)" multiple>
+
+    <br>
+    <button type="submit">Submit</button>
+</form>

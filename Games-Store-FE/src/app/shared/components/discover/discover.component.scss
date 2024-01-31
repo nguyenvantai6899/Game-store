@@ -1,0 +1,128 @@
+section {
+  .slide-media {
+    .slide-media-asset {
+      .slide-show {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: cover;
+          border-radius: 20px;
+        }
+        .slide-description {
+          width: 60%;
+          height: 100%;
+          position: absolute;
+          padding-left: 50px;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          color: white;
+          .name {
+            margin-bottom: 20px;
+          }
+          .description {
+            margin-bottom: 100px;
+            font-size: x-large;
+            font-weight: 600;
+          }
+          .price {
+            margin-bottom: 10px;
+            span {
+              text-decoration-line: underline;
+            }
+          }
+          .group-button {
+            display: flex;
+            .buy {
+              padding: 15px;
+              border: none;
+              border-radius: 5px;
+            }
+            .wish-list {
+              padding: 15px;
+              display: flex;
+              background: space;
+              border: none;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+    .slide-media-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      .slide-toggle {
+        height: 19%;
+        overflow: hidden;
+        background-color: var(--color-primary-background);
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 10px;
+        position: relative;
+        .slide-content {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          z-index: 1;
+        }
+        img {
+          object-fit: cover;
+          max-width: 100%;
+          border-radius: 10px;
+        }
+        .layout-button {
+          position: absolute;
+          background: #363636;
+          top: 0;
+          left: 0;
+          width: 0%;
+          height: 100%;
+          animation: slide 5s;
+        }
+        @keyframes slide {
+          from {
+            width: 0%;
+          }
+          to {
+            width: 100%;
+          }
+        }
+      }
+      .active {
+        background-color: #2a2a2a;
+      }
+    }
+  }
+}
+.fadeInOut {
+  animation: imageSlide 5s;
+}
+@keyframes imageSlide {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 100;
+  }
+}
+.slide-from-right {
+  animation: slideRightToLeft 0.2s ease-in-out;
+}
+
+@keyframes slideRightToLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

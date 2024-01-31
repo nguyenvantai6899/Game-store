@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+:root {
+  /** CSS PRIMARY COLORS */
+  --color-primary-background: #121212;
+  --color-primary-text-active: rgb(245, 245, 245);
+  --color-primary-text-disabled: rgb(245, 245, 245);
+  --color-primary: rgb(0, 116, 228);
+  --color-secondary: #202020;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 0.875rem;
+  font-family: Inter, sans-serif;
+}
+
+a,
+ul,
+li {
+  text-decoration: none;
+  list-style-type: none;
+}
+section {
+  margin: 0 10%;
+}

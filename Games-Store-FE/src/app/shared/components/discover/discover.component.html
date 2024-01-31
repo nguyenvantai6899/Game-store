@@ -1,0 +1,43 @@
+<section>
+    <div class="section">
+        <div class="slide-media row">
+            <div class="slide-media-asset col-9 ">
+                <div class="slide-show" *ngIf="productImageSlider">
+                    <div class="slide-description">
+                        <div class="name">{{productImageSlider.name}}</div>
+                        <div class="description">{{productImageSlider.description}}</div>
+                        <div class="price">Starting at <span>{{productImageSlider.price}}</span>&nbsp; $</div>
+                        <div class="group-button">
+                            <button class="buy">Pre-Purchase Now</button>
+                            <button class="wish-list">
+                                <div class="wishbutton-circle">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                </div>
+                                <span>&nbsp;Add to Wishlist</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <img [src]="productImageSlider.productImages[0].path"
+                        [alt]="productImageSlider.productImages[0].name" [class]="slideAnimationClass">
+                </div>
+            </div>
+            <div class="slide-media-toggle col-3">
+                <ng-container *ngFor="let product of productsCarousel; index as i ">
+                    <button class="slide-toggle" [class.active]="i === activeIndex"
+                        (click)="focusSlide(product); setActiveIndex(i)">
+                        <div class="slide-content">
+                            <div class="slide-image col-4">
+                                <img [src]="product.productImages[0].path" [alt]="product.productImages[0].name">
+                            </div>
+                            <div class="col-8">{{product.name}}</div>
+                        </div>
+                        <div [ngClass]="{'fadeInOut': i=== activeIndex, 'layout-button': i=== activeIndex}"></div>
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+
+</section>
