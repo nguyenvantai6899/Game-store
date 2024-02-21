@@ -29,4 +29,8 @@ export class ProductService {
     return this.httpClient.get<any>(API + "/product/get-product-by-id/" + id);
   }
 
+  getAllProductDiscount(): Observable<any> {
+    return this.httpClient.get<any>(API + "/product/get-products-discount");
+  }
+
 }

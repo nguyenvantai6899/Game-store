@@ -1,9 +1,11 @@
 package com.gamesstorebe.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,5 +21,9 @@ public class Discount {
     private Date startDate;
     private Date endDate;
     private Boolean status;
+
+    @OneToMany(mappedBy = "discount")
+    @JsonBackReference
+    private List<ProductDiscount> productDiscounts;
 
 }

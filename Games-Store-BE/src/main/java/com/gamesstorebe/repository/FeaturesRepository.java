@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@Repository
+@Repository(value = "featuresRepository")
 public interface FeaturesRepository extends JpaRepository<Features, Integer> {
     @Query("select f from Features f join f.productsFeatures p where p.id = :productId")
     List<Features> findAllByProduct(@Param("productId") int productId);

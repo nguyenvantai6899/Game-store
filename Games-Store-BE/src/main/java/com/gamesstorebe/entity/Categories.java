@@ -20,8 +20,5 @@ public class Categories {
     private int id;
     private String categoryName;
 
-    @OneToMany(mappedBy = "categories")
-    @JsonManagedReference
-    private Set<Product> products = new HashSet<>();
 
 }

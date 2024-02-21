@@ -1,8 +1,10 @@
 package com.gamesstorebe.service.impl;
 
 import com.gamesstorebe.customHandleError.system.Result;
+import com.gamesstorebe.entity.Features;
 import com.gamesstorebe.entity.Product;
 import com.gamesstorebe.entity.ProductImage;
+import com.gamesstorebe.repository.FeaturesRepository;
 import com.gamesstorebe.repository.ProductImageRepository;
 import com.gamesstorebe.repository.ProductRepository;
 import com.gamesstorebe.repository.RatingReviewRepository;
@@ -19,20 +21,27 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final FileHandleService fileHandleService;
     private final ProductImageService productImageService;
-
+    private final FeaturesRepository featuresRepository;
     private final ProductImageRepository productImageRepository;
 
-    public ProductService(ProductRepository productRepository, RatingReviewRepository ratingReviewRepository, FileHandleService fileHandleService, ProductImageService productImageService, ProductImageRepository productImageRepository) {
+    public ProductService(ProductRepository productRepository, RatingReviewRepository ratingReviewRepository, FileHandleService fileHandleService, ProductImageService productImageService, FeaturesRepository featuresRepository, ProductImageRepository productImageRepository) {
         this.productRepository = productRepository;
         this.fileHandleService = fileHandleService;
         this.productImageService = productImageService;
+        this.featuresRepository = featuresRepository;
         this.productImageRepository = productImageRepository;
     }
 
     public Result getAllProducts() {
         try {
             List<Product> products = productRepository.findAll();
-            Optional<List<Product>> optionalProducts = Optional.ofNullable(products);
+//            if (!products.isEmpty()) {
+//                for (Product product : products) {
+//                    List<Features> features = featuresRepository.findAllByProduct(product.getId());
+//                    product.setProductsFeatures(features);
+//                }
+//            }
+            Optional<List<Product>> optionalProducts = Optional.of(products);
             if (!optionalProducts.get().isEmpty()) {
                 return new Result(true, HttpStatus.OK, "Find all products", optionalProducts.get());
             } else {
@@ -51,7 +60,7 @@ public class ProductService {
                 List<ProductImage> productImageList = productImageService.getProductImagesByProductId(product.getId());
                 for (MultipartFile file1: file){
                     ProductImage productImage = new ProductImage();
-                    productImage.setName(fileHandleService.uploadImage(file1));
+//                    productImage.setName(fileHandleService.uploadImage(file1));
                     productImage.setProduct(product);
                     productImageRepository.save(productImage);
                 }
@@ -59,12 +68,11 @@ public class ProductService {
                 Product productExist = productRepository.findById(product.getId()).get();
                 productExist.setName(product.getName());
                 productExist.setProductsFeatures(product.getProductsFeatures());
-                productExist.setStatus(product.isStatus());
+                productExist.setStatus(product.getStatus());
                 productExist.setCategories(product.getCategories());
                 productExist.setDescription(product.getDescription());
                 productExist.setPrice(product.getPrice());
                 productExist.setDeveloper(product.getDeveloper());
-                productExist.setStock(product.getStock());
                 productExist.setReleaseDate(product.getReleaseDate());
                 productRepository.save(productExist);
 
@@ -99,8 +107,9 @@ public class ProductService {
 
     public Result findProductByFeatures(int featuresID) {
         try {
-            Optional<List<Product>> product = productRepository.findAllByFeatures(featuresID);
-            if (product.isPresent()) {
+            List<Product> product = productRepository.findAllByFeatures(featuresID);
+            Optional<List<Product>> productOptional = Optional.ofNullable(product);
+            if (productOptional.isPresent()) {
                 return new Result(true, HttpStatus.OK, "The product has been successfully found", product);
             }
             return new Result(false, HttpStatus.NOT_FOUND, "The product does not exist", null);

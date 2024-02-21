@@ -24,6 +24,7 @@ import { ContentComponent } from "./shared/components/layout/content/content.com
 import { FooterComponent } from "./shared/components/layout/footer/footer.component";
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { PrimengModuleModule } from './modules/primeng-module/primeng-module.module';
+import { CarouselSwiperSliderComponent } from './shared/components/carousel-swiper-slider/carousel-swiper-slider.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { PrimengModuleModule } from './modules/primeng-module/primeng-module.mod
     SignInComponent,
     InformInfUserComponent,
     DialogComponent,
+    CarouselSwiperSliderComponent,
   ],
   imports: [
     BrowserModule,

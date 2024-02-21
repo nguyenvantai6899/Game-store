@@ -52,7 +52,6 @@ public class CategoriesService {
             }else{
                 Categories categoryPresented = categoriesRepository.findById(categories.getId()).get();
                 categoryPresented.setCategoryName(categories.getCategoryName());
-                categoryPresented.setProducts(categories.getProducts());
                 categoriesRepository.save(categoryPresented);
                 return new Result (true, HttpStatus.OK, "Edit category successfully", categoryPresented);
             }

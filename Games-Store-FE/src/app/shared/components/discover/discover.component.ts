@@ -20,7 +20,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     this.productService.getProducts().subscribe(
       (response: any) => {
         this.products = response.data || [];
-        this.productsCarousel = this.products.slice(this.products.length - 6, this.products.length);
+        this.productsCarousel = this.getRandomProducts(this.products);
         this.initializeCarousel();
       },
       (err: any) => {
@@ -29,6 +29,28 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     );
   }
 
+  getRandomProducts(products: any[]): any[] {
+    const randomProducts = [];
+    const shuffled = products.slice(0);
+
+    let currentIndex = shuffled.length;
+    let temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = shuffled[currentIndex];
+      shuffled[currentIndex] = shuffled[randomIndex];
+      shuffled[randomIndex] = temporaryValue;
+    }
+
+    for (let i = 0; i < 6; i++) {
+      randomProducts.push(shuffled[i]);
+    }
+
+    return randomProducts;
+  }
   initializeCarousel(): void {
     if (this.productsCarousel.length > 0) {
       this.productImageSlider = this.productsCarousel[this.activeIndex];
@@ -49,6 +71,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
 
   focusSlide(product: Product): void {
     this.clearIntervalSlide();
+    this.updateSlideAnimation();
     this.productImageSlider = product;
     this.startCarousel();
   }
@@ -67,7 +90,6 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   updateSlideAnimation() {
     this.slideAnimationClass = 'slide-from-right';
     this.cdr.detectChanges(); // Force change detection
-    console.log(123);
 
     setTimeout(() => {
       this.slideAnimationClass = '';

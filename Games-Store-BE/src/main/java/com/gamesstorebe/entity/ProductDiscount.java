@@ -1,5 +1,7 @@
 package com.gamesstorebe.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +15,9 @@ public class ProductDiscount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
+
+
+    @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
 

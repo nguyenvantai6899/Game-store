@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gamesstorebe.customHandleError.system.Result;
 import com.gamesstorebe.entity.Product;
+import com.gamesstorebe.service.ProductDiscountService;
 import com.gamesstorebe.service.impl.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/product")
 public class ProductController {
     private final ProductService productService;
-
-    public ProductController(ProductService productService) {
+    private final ProductDiscountService productDiscountService;
+    public ProductController(ProductService productService, ProductDiscountService productDiscountService) {
         this.productService = productService;
+        this.productDiscountService = productDiscountService;
     }
 
     @GetMapping("/")
@@ -50,4 +52,8 @@ public class ProductController {
         return productService.findProductByFeatures(featuredId);
     }
 
+    @GetMapping("/get-products-discount")
+    public Result getProductsDiscount(){
+        return new Result(true, HttpStatus.OK, "get products discount", productDiscountService.getProducts());
+    }
 }

@@ -19,9 +19,10 @@ public class FileHandleController {
         this.fileHandleService = showImageService;
     }
 
-    @GetMapping("/image/{fileName}")
-    public ResponseEntity<Resource> showImage(@PathVariable (name = "fileName") String fileName) throws IOException {
-        return fileHandleService.showImage(fileName);
+    @GetMapping("/image/{type}/{fileName}")
+    public ResponseEntity<Resource> showImage(@PathVariable (name = "fileName") String fileName,
+                                              @PathVariable (name = "type") String type) throws IOException {
+        return fileHandleService.showImage(type, fileName);
     }
 
     @GetMapping("/upload")

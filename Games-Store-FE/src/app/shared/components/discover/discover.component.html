@@ -18,8 +18,8 @@
                         </div>
                     </div>
 
-                    <img [src]="productImageSlider.productImages[0].path"
-                        [alt]="productImageSlider.productImages[0].name" [class]="slideAnimationClass">
+                    <img [src]="productImageSlider.productImages[0].imageBanners.path"
+                        [alt]="productImageSlider.productImages[0].imageBanners.name" [class]="slideAnimationClass">
                 </div>
             </div>
             <div class="slide-media-toggle col-3">
@@ -28,7 +28,8 @@
                         (click)="focusSlide(product); setActiveIndex(i)">
                         <div class="slide-content">
                             <div class="slide-image col-4">
-                                <img [src]="product.productImages[0].path" [alt]="product.productImages[0].name">
+                                <img [src]="product.productImages[0].imageBanners.path"
+                                    [alt]="product.productImages[0].imageBanners.name">
                             </div>
                             <div class="col-8">{{product.name}}</div>
                         </div>
@@ -38,6 +39,8 @@
             </div>
         </div>
     </div>
-
+    <div class="section">
+        <app-carousel-swiper-slider></app-carousel-swiper-slider>
+    </div>
 
 </section>

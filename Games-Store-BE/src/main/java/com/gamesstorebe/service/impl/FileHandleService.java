@@ -2,6 +2,7 @@ package com.gamesstorebe.service.impl;
 
 import com.gamesstorebe.customHandleError.system.Result;
 import com.gamesstorebe.util.FileUtil;
+import lombok.extern.flogger.Flogger;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -19,9 +20,9 @@ import java.util.Objects;
 @Service
 public class FileHandleService {
 
-    public ResponseEntity<Resource> showImage(String fileName) throws IOException {
-        String imagePath = FileUtil.PATH_FILE_UPLOAD + "/file/image/" + fileName;
-
+    public ResponseEntity<Resource> showImage( String type, String fileName) throws IOException {
+        String imagePath = FileUtil.PATH_FILE_UPLOAD + "/file/image/" + type + "/" + fileName;
+        System.out.println(imagePath);
         Path path = Paths.get(imagePath);
 
         Resource resource = new ByteArrayResource(Files.readAllBytes(path));

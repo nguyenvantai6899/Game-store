@@ -16,6 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
      Optional<Product> deleteProductById(Integer id);
      @Query(value = "select p from Product p join p.productsFeatures f where f.id = :id")
-     Optional<List<Product>> findAllByFeatures(@Param("id") int id);
+     List<Product> findAllByFeatures(@Param("id") int id);
+
 
 }
