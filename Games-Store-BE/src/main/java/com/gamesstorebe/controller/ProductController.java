@@ -22,12 +22,16 @@ public class ProductController {
 
     @GetMapping("/")
     public Result getAllProducts() {
-        return productService.getAllProducts();
+        if (!productService.getAllProducts().isEmpty()) {
+            return new Result(true, HttpStatus.OK, "Find all products", productService.getAllProducts());
+        } else {
+            return new Result(false, HttpStatus.NO_CONTENT, "No products found", null);
+        }
     }
 
     @GetMapping("/get-product-by-id/{productId}")
     public Result getProductByProductId(@PathVariable (name = "productId") Integer productId) {
-        return productService.findProductById(productId);
+        return new Result(true, HttpStatus.OK,"The product has been edit successfully", productService.findProductById(productId));
     }
 
     @PostMapping("save-product")
@@ -56,4 +60,5 @@ public class ProductController {
     public Result getProductsDiscount(){
         return new Result(true, HttpStatus.OK, "get products discount", productDiscountService.getProducts());
     }
+
 }

@@ -1,6 +1,7 @@
 package com.gamesstorebe.service.impl;
 
 import com.gamesstorebe.customHandleError.system.Result;
+import com.gamesstorebe.dto.ProductDTO;
 import com.gamesstorebe.entity.Features;
 import com.gamesstorebe.entity.Product;
 import com.gamesstorebe.entity.ProductImage;
@@ -8,6 +9,8 @@ import com.gamesstorebe.repository.FeaturesRepository;
 import com.gamesstorebe.repository.ProductImageRepository;
 import com.gamesstorebe.repository.ProductRepository;
 import com.gamesstorebe.repository.RatingReviewRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,39 +21,24 @@ import java.util.Optional;
 @Service("productService")
 public class ProductService {
 
+    private final ModelMapper mapper;
     private final ProductRepository productRepository;
     private final FileHandleService fileHandleService;
     private final ProductImageService productImageService;
     private final FeaturesRepository featuresRepository;
     private final ProductImageRepository productImageRepository;
 
-    public ProductService(ProductRepository productRepository, RatingReviewRepository ratingReviewRepository, FileHandleService fileHandleService, ProductImageService productImageService, FeaturesRepository featuresRepository, ProductImageRepository productImageRepository) {
+    public ProductService(ProductRepository productRepository, RatingReviewRepository ratingReviewRepository, ModelMapper mapper, FileHandleService fileHandleService, ProductImageService productImageService, FeaturesRepository featuresRepository, ProductImageRepository productImageRepository) {
         this.productRepository = productRepository;
+        this.mapper = mapper;
         this.fileHandleService = fileHandleService;
         this.productImageService = productImageService;
         this.featuresRepository = featuresRepository;
         this.productImageRepository = productImageRepository;
     }
 
-    public Result getAllProducts() {
-        try {
-            List<Product> products = productRepository.findAll();
-//            if (!products.isEmpty()) {
-//                for (Product product : products) {
-//                    List<Features> features = featuresRepository.findAllByProduct(product.getId());
-//                    product.setProductsFeatures(features);
-//                }
-//            }
-            Optional<List<Product>> optionalProducts = Optional.of(products);
-            if (!optionalProducts.get().isEmpty()) {
-                return new Result(true, HttpStatus.OK, "Find all products", optionalProducts.get());
-            } else {
-                return new Result(false, HttpStatus.NO_CONTENT, "No products found", null);
-            }
-        }
-        catch (Exception e){
-            return new Result(false,HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), null);
-        }
+    public List<ProductDTO> getAllProducts() {
+        return productRepository.findAll().stream().map(product -> mapper.map(product, ProductDTO.class)).toList();
     }
 
     public void saveProduct(Product product, MultipartFile[] file) throws IOException {
@@ -79,17 +67,8 @@ public class ProductService {
             }
         }
 
-    public Result findProductById(Integer id) {
-        try {
-           Product product = productRepository.findById(id).orElse(null);
-            if (product!=null) {
-                return new Result(true, HttpStatus.OK, "The product has been successfully found", product);
-            }
-            return new Result(false, HttpStatus.NOT_FOUND, "The product does not exist", null);
-        }
-        catch (Exception e) {
-            return new Result(false,HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), null);
-        }
+    public ProductDTO findProductById(int id){
+        return productRepository.findById(id).map(product -> mapper.map(product, ProductDTO.class)).orElse(null);
     }
     public Result deleteProductById(Integer id) {
         try {

@@ -1,0 +1,59 @@
+<div class="search-watcher">
+    <div class="search-watcher-item">
+        <div class="header">
+            <h2 class="watch-name">Top Seller</h2>
+            <button>VIEW MORE</button>
+        </div>
+        <div class="content">
+            <ng-container *ngFor="let product of topSeller">
+                <div class="product row" [routerLink]="['/product-detail']" [queryParams]="{id : product.id}">
+                    <div class="col-3">
+                        <img [src]="product.productImages.imageAvatars[0].path" [alt]="product.name">
+                    </div>
+                    <div class="col-9">
+                        <p>{{product.name}}</p>
+                        <p>đ {{product.price}}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="search-watcher-item">
+        <div class="header">
+            <h2 class="watch-name">Most Player</h2>
+            <button>VIEW MORE</button>
+        </div>
+        <div class="content">
+            <ng-container *ngFor="let product of mostPlayer">
+                <div class="product row" [routerLink]="['/product-detail']" [queryParams]="{id : product.id}">
+                    <div class="col-3">
+                        <img [src]="product.productImages.imageAvatars[0].path" [alt]="product.name">
+                    </div>
+                    <div class="col-9">
+                        <p>{{product.name}}</p>
+                        <p>đ {{product.price}}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="search-watcher-item">
+        <div class="header">
+            <h2 class="watch-name">Top Rate</h2>
+            <button>VIEW MORE</button>
+        </div>
+        <div class="content">
+            <ng-container *ngFor="let product of topRated">
+                <div class="product row" [routerLink]="['/product-detail']" [queryParams]="{id : product.id}">
+                    <div class="col-3">
+                        <img [src]="product.productImages.imageAvatars[0].path" [alt]="product.name">
+                    </div>
+                    <div class="col-9">
+                        <p>{{product.name}}</p>
+                        <p>đ {{product.price}}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

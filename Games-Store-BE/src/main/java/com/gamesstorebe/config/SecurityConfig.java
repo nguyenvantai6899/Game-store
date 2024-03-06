@@ -76,6 +76,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/product/**").permitAll()
                         .requestMatchers("/file/**").permitAll()
+                        .requestMatchers("/cart/**").permitAll()
                         .anyRequest().authenticated()
                 )
 

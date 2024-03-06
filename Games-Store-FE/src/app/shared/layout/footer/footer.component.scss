@@ -1,0 +1,43 @@
+footer {
+  background-color: #333;
+  padding: 20px 70px;
+  .social-network-container {
+    a {
+      font-size: 30px;
+      margin-right: 10px;
+    }
+    margin-bottom: 20px;
+  }
+  .link-container {
+    .subtitle {
+      color: #575757;
+    }
+  }
+  .copyright {
+    border-top: 1px solid #abc1b1;
+    color: #abc1b1;
+    padding: 30px 10px;
+    font-size: 14px;
+    p {
+      margin-right: 50%;
+    }
+  }
+  .legal {
+    .link {
+      margin-right: 10px;
+    }
+    .legal-icon {
+      a {
+        font-size: 30px;
+        margin-right: 10px;
+      }
+    }
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--primary-color);
+  }
+}

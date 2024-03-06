@@ -1,21 +1,25 @@
 package com.gamesstorebe.dto;
 
-import com.gamesstorebe.entity.Categories;
-import com.gamesstorebe.entity.Developers;
-import com.gamesstorebe.entity.Features;
+import com.gamesstorebe.entity.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDTO {
     private int id;
     private String name;
     private String description;
-    private String image;
-    private String video;
+    private ProductImage productImages;
     private Double price;
     private String releaseDate  ;
-    private int stock;
-    private Categories category;
-    private Features feature;
+    private int downloads;
+    private Categories categories;
+    private List<Features> productsFeatures;
     private Developers developer;
+    private Discount discount;
 }

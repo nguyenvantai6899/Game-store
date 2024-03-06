@@ -3,28 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/components/layout/header/header.component';
+import { HeaderComponent } from './shared/layout/header/header.component';
 import { SupportComponent } from './shared/components/support/support.component';
 import { DistributionComponent } from './shared/components/distribution/distribution.component';
-import { DiscoverComponent } from './shared/components/discover/discover.component';
-import { BrowseComponent } from './shared/components/browse/browse.component';
-import { NewsComponent } from './shared/components/news/news.component';
-import { WishlistComponent } from './shared/components/wishlist/wishlist.component';
-import { CartComponent } from './shared/components/cart/cart.component';
+import { DiscoverComponent } from './shared/components/menu/discover/discover.component';
+import { BrowseComponent } from './shared/components/menu/browse/browse.component';
+import { NewsComponent } from './shared/components/menu/news/news.component';
+import { WishlistComponent } from './shared/components/user/wishlist/wishlist.component';
+import { CartComponent } from './shared/components/user/cart/cart.component';
 import { MenuComponent } from './shared/components/menu/menu.component';
-import { SignInComponent } from './shared/components/authentication-form/sign-in/sign-in.component';
-import { LayoutComponent } from './shared/components/layout/layout.component';
+import { SignInComponent } from './shared/authentication-form/sign-in/sign-in.component';
+import { LayoutComponent } from './shared/layout/layout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
 import { ProductComponent } from './shared/components/product/product.component';
-import { SignUpComponent } from './shared/components/authentication-form/sign-up/sign-up.component';
-import { InformInfUserComponent } from './shared/components/authentication-form/inform-inf-user/inform-inf-user.component';
-import { ContentComponent } from "./shared/components/layout/content/content.component";
-import { FooterComponent } from "./shared/components/layout/footer/footer.component";
+import { SignUpComponent } from './shared/authentication-form/sign-up/sign-up.component';
+import { InformInfUserComponent } from './shared/authentication-form/inform-inf-user/inform-inf-user.component';
+import { ContentComponent } from "./shared/layout/content/content.component";
+import { FooterComponent } from "./shared/layout/footer/footer.component";
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { PrimengModuleModule } from './modules/primeng-module/primeng-module.module';
-import { CarouselSwiperSliderComponent } from './shared/components/carousel-swiper-slider/carousel-swiper-slider.component';
+import { CarouselSwiperSliderComponent } from './shared/components/product/carousel-swiper-slider/carousel-swiper-slider.component';
+import { SearchByFeatureComponent } from './shared/components/product/search-by-feature/search-by-feature.component';
+import { SearchByWatcherComponent } from './shared/components/product/search-by-watcher/search-by-watcher.component';
+import { ProductDetailComponent } from './shared/components/product/product-detail/product-detail.component';
 
 
 @NgModule({
@@ -48,6 +51,9 @@ import { CarouselSwiperSliderComponent } from './shared/components/carousel-swip
     InformInfUserComponent,
     DialogComponent,
     CarouselSwiperSliderComponent,
+    SearchByFeatureComponent,
+    SearchByWatcherComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

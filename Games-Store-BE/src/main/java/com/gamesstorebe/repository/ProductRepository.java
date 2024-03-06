@@ -1,5 +1,6 @@
 package com.gamesstorebe.repository;
 
+import com.gamesstorebe.dto.ProductDTO;
 import com.gamesstorebe.entity.Features;
 import com.gamesstorebe.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
      List<Product> findAllByFeatures(@Param("id") int id);
 
 
+     @Query(value = "select p, d from Product p " +
+             "left join p.productDiscount pd " +
+             "left join pd.discount d " +
+             "where p.id = :id")
+     Object findProductsWithDiscounts(@Param("id") int id);
 }

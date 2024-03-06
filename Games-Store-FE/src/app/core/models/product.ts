@@ -7,26 +7,36 @@ export interface Product {
     price: number;
     releaseDate: Date;
     status: boolean;
-    productImages: Image[];
+    productImages: Image;
     category: Categories;
-    features: Features[];
+    productsFeatures: Features[];
+    downloads: number;
+    discount: Discount;
+    categories: Categories;
+    developer: Developers;
+
 }
 
 export interface Features {
     id: number;
-    featuresName: string;
+    featureName: string;
 }
 
 export interface Categories {
     id: number;
-    categoriesName: string;
+    categoryName: string;
+}
+
+export interface Developers {
+    id: number;
+    developerName: string;
 }
 
 export interface Image {
     id: number;
-    imageIcons: ImageIcon;
-    imageBanners: ImageBanner;
-    imageAvatars: ImageAvatar;
+    imageIcons: ImageIcon[];
+    imageBanners: ImageBanner[];
+    imageAvatars: ImageAvatar[];
 }
 export interface ImageBanner {
     id: number;

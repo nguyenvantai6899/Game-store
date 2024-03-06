@@ -1,0 +1,21 @@
+<div class="feature-search">
+    <div class="header">
+        <h2 class="topic">
+            Free Game
+        </h2>
+        <a href="">View more</a>
+    </div>
+    <div class="content">
+        <ng-container *ngFor="let product of productsFree">
+            <div class="product" [routerLink]="['/product-detail']" [queryParams]="{id : product.id}">
+                <div class="image-banner">
+                    <img [src]="product.productImages.imageBanners[0].path" [alt]="product.name">
+                </div>
+                <div class="name">
+                    <p>{{product.name}}</p>
+                </div>
+            </div>
+
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+.swiper-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  margin: 0 auto;
+  color: white;
+}
+.swiper-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: hidden; /* Đảm bảo không hiển thị nội dung bị tràn ra ngoài */
+  transition: transform 0.5s ease; /* Thêm hiệu ứng chuyển động */
+  .swiper-block {
+    cursor: pointer;
+    width: 18%;
+    height: auto;
+    vertical-align: top;
+    white-space: normal;
+    position: relative;
+    .btn-add-wishlist {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 10px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+    }
+    .btn-add-wishlist:hover {
+      transform: scale(1.5, 1.5);
+    }
+
+    .swiper-block-image {
+      width: 100%;
+      height: 300px;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+      }
+    }
+    .swiper-block-content {
+      .swiper-block-price {
+        display: flex;
+        .swiper-block-percent-discount {
+          background-color: var(--color-primary);
+          font-size: smaller;
+          border-radius: 5px;
+          padding: 5px;
+        }
+        .swiper-block-price-actual {
+          text-decoration: line-through;
+          color: #989898;
+        }
+      }
+    }
+  }
+}
+
+.swiper-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left,
+.right {
+  cursor: pointer;
+}

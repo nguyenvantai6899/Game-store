@@ -2,6 +2,7 @@ package com.gamesstorebe.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
@@ -30,8 +31,8 @@ public class Product {
 
     private int downloads;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private Set<ProductImage> productImages = new HashSet<>();
+    @OneToOne(mappedBy = "product")
+    private ProductImage productImages;
 
     @ManyToOne
     @JoinColumn(name = "categories_id")
@@ -43,11 +44,9 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "featured_id")
     )
-    @JsonManagedReference
     private List<Features> productsFeatures;
 
     @ManyToOne
-    @JsonManagedReference
     @JoinColumn(name = "developer_id")
     private Developers developer;
 
@@ -56,4 +55,7 @@ public class Product {
     @JsonBackReference
     private ProductDiscount productDiscount;
 
+    @ManyToMany
+    @JsonBackReference
+    private List<Cart> carts;
 }

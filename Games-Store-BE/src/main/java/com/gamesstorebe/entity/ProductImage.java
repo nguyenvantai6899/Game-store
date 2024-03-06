@@ -21,38 +21,16 @@ public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    private String name;
-//    @Transient
-//    private String iconPath;
-//    private String bannerPath;
-//    private String avatarPath;
-    @ManyToOne
-    @JoinColumn(name = "banner_id")
-    private ImageBanner imageBanners;
+    @OneToMany(mappedBy = "productImages")
+    private List<ImageBanner> imageBanners;
+    @OneToMany(mappedBy = "productImages")
+    private List<ImageAvatar> imageAvatars;
+    @OneToMany(mappedBy = "productImages")
+    private List<ImageIcon> imageIcons;
 
-    @ManyToOne
-    @JoinColumn(name = "avatar_id")
-    private ImageAvatar imageAvatars;
-
-    @ManyToOne
-    @JoinColumn(name = "icon_id")
-    private ImageIcon imageIcons;
-
-    @ManyToOne
+    @OneToOne
     @JsonBackReference
+    @JoinColumn(name = "product_id")
     private Product product;
 
-//    public String getPath() {
-//        return "http://localhost:8888/api/v1/file/image/" + name;
-//    }
-//
-//    public String getIconPath() {
-//        return "http://localhost:8888/api/v1/file/image/icon/" + name;
-//    }
-//    public String getBannerPath() {
-//        return "http://localhost:8888/api/v1/file/image/banner/" + name;
-//    }
-//    public String getAvatarPath() {
-//        return "http://localhost:8888/api/v1/file/image/avatar/" + name;
-//    }
 }

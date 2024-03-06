@@ -32,6 +32,7 @@
     justify-content: space-between;
     .menu-bar-atb {
       display: flex;
+      align-items: center;
       .menu-item {
         margin: 0px 10px;
         color: white;
@@ -50,5 +51,11 @@
         }
       }
     }
+  }
+  a {
+    text-decoration: none;
+  }
+  ul {
+    margin-bottom: 0px;
   }
 }

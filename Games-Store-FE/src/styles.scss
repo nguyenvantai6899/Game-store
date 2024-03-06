@@ -6,9 +6,14 @@
   /** CSS PRIMARY COLORS */
   --color-primary-background: #121212;
   --color-primary-text-active: rgb(245, 245, 245);
-  --color-primary-text-disabled: rgb(245, 245, 245);
+  --color-primary-text-disabled: rgb(245, 245, 245, 0.6);
   --color-primary: rgb(0, 116, 228);
   --color-secondary: #202020;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 body {
   margin: 0;
@@ -25,5 +30,5 @@ li {
   list-style-type: none;
 }
 section {
-  margin: 0 10%;
+  padding: 20px 10%;
 }

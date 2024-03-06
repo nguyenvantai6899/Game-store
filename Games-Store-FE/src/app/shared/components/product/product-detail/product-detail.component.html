@@ -1,0 +1,106 @@
+<app-menu></app-menu>
+<section>
+    <div class="product-container">
+        <div class="detail-info row">
+            <div class="name col-12">
+                <h3>{{product?.name}}</h3>
+            </div>
+            <div class="rate col-12">
+            </div>
+        </div>
+        <div class="row" *ngIf="product !== null && product!== undefined">
+            <h6>Overview</h6>
+            <div class="overview col-8">
+                <div class="wrapper">
+                    <div class="slider">
+                        <div class="slide">
+                            <ng-container *ngIf="product.productImages.imageBanners[0]?.path">
+                                <img [src]="product.productImages.imageBanners[0].path" width="100%" height="150">
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <ng-container *ngFor="let img of product.productImages?.imageBanners">
+                            <img [src]="img.path" alt="" width="100" height="55">
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="description">
+                    <ng-container *ngIf="product?.description">
+                        <div class="info-des">
+                            <h6>Description</h6>
+                            <p>{{product.description}}</p>
+                        </div>
+                    </ng-container>
+                    <div class="info-prod d-flex justify-content-between">
+                        <ng-container *ngIf="product?.categories">
+                            <div class="categories">
+                                <h6 style="color: var(--color-primary-text-disabled)">Genders</h6>
+                                <p style="color: var(--color-primary-text-active)">{{product.categories.categoryName}}
+                                </p>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="product?.productsFeatures">
+                            <div class="features">
+                                <h6 style="color: var(--color-primary-text-disabled)">Features</h6>
+                                <ng-container *ngFor="let featured of product.productsFeatures">
+                                    <span class="feature-name"><a href="">{{featured.featureName}}</a>,</span>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                </div>
+            </div>
+            <div class="action col-4">
+                <div class="logo">
+                    <ng-container *ngIf="product.productImages.imageIcons[0]?.path">
+                        <img [src]="product.productImages.imageIcons[0].path" width="100%" height="150">
+                    </ng-container>
+                </div>
+                <div class="price">
+                    <ng-template #price>
+                        <ng-container *ngIf="product.discount?.status;else notDiscount">
+                            <span class="percent-discount">{{product.discount.percentDiscount}}%</span>
+                            <span style="text-decoration: line-through;color: #989898;">{{product.price}}</span>
+                            <span>{{product.price * product.discount.percentDiscount / 100 | number:'1.3-3'}}</span>
+                        </ng-container>
+                        <ng-template #notDiscount>
+                            <span>{{product.price}}</span>
+                        </ng-template>
+                    </ng-template>
+                </div>
+                <div class="btn-toggle">
+                    <ng-container *ngIf="product.price === 0;else elseTemplate">
+                        <button>GET</button>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <button class="buy">BUY NOW</button>
+                        <ng-container *ngIf="!checkProductExist; else checkProductExist">
+                            <button [routerLink]="['/menu/cart']" class="cart">VIEW IN CART</button>
+                        </ng-container>
+                        <ng-template #checkProductExist>
+                            <button class="cart" (click)="addToCart(product.id)">ADD TO CART</button>
+                        </ng-template>
+
+                        <button class="wishlist"><i class="fa-solid fa-circle-plus"></i> ADD TO WISHLIST</button>
+                    </ng-template>
+                </div>
+                <div class="info">
+                    <ng-container *ngIf="product?.developer">
+                        <div class="developer d-flex justify-content-between">
+                            <h6>Developer</h6>
+                            <span>{{product.developer.developerName}}</span>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="product?.releaseDate">
+                        <div class="release-date d-flex justify-content-between">
+                            <h6>Release Date</h6>
+                            <span>{{product.releaseDate}}</span>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
