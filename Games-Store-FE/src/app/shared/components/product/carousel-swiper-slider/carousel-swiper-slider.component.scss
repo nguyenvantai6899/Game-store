@@ -8,8 +8,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  overflow-x: hidden; /* Đảm bảo không hiển thị nội dung bị tràn ra ngoài */
-  transition: transform 0.5s ease; /* Thêm hiệu ứng chuyển động */
+  overflow-x: hidden;
+  transition: transform 0.5s ease;
+  margin-bottom: 10px;
   .swiper-block {
     cursor: pointer;
     width: 18%;

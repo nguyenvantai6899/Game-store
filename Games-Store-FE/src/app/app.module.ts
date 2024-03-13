@@ -28,6 +28,8 @@ import { CarouselSwiperSliderComponent } from './shared/components/product/carou
 import { SearchByFeatureComponent } from './shared/components/product/search-by-feature/search-by-feature.component';
 import { SearchByWatcherComponent } from './shared/components/product/search-by-watcher/search-by-watcher.component';
 import { ProductDetailComponent } from './shared/components/product/product-detail/product-detail.component';
+import { ToastComponent } from './shared/components/toast/toast.component';
+import { CheckoutComponent } from './shared/components/user/checkout/checkout.component';
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import { ProductDetailComponent } from './shared/components/product/product-deta
     SearchByFeatureComponent,
     SearchByWatcherComponent,
     ProductDetailComponent,
+    ToastComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

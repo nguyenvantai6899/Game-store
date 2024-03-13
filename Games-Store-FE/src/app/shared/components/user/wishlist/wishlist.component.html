@@ -1,1 +1,63 @@
-<p>wishlist works!</p>
+<section>
+    <h3>MY WISHLIST</h3>
+    <ng-container *ngIf="wishlist?.length; else wishlistTemplate">
+        <div class="wishlist-container row">
+            <div class="wishlist-layout-main col-8">
+                <ng-container *ngFor="let wl of wishlist">
+                    <div class="wishlist-main">
+                        <div class="product-image">
+                            <img [src]="wl.product.productImages.imageAvatars[0].path" alt="" width="130" height="170">
+                        </div>
+                        <div class="product-name">
+                            <div>
+                                <h5>{{wl.product.name}}</h5>
+                            </div>
+                            <div><i class="fa-solid fa-star-of-david"></i>
+                                <span> Earn 5% back in Epic Rewards</span>
+                            </div>
+                            <div>
+                                <p>Self-Refundable <i class="fa-regular fa-circle-question"></i></p>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <ng-container *ngIf="wl.product.price === 0; else price">
+                                <span>FREE</span>
+                            </ng-container>
+                            <ng-template #price>
+                                <ng-container *ngIf="wl.product.discount;else notDiscount">
+                                    <span class="percent-discount">{{wl.product.discount.percentDiscount}}%</span>
+                                    <span
+                                        style="text-decoration: line-through;color: #989898;">{{wl.product.price}}</span>
+                                    <span>{{wl.product.price * (100 - wl.product.discount.percentDiscount )/ 100 |
+                                        number:'1.2-2'}}</span>
+                                    <p>Sale end {{wl.product.discount.endDate | date}}</p>
+                                </ng-container>
+                                <ng-template #notDiscount>
+                                    <span>{{wl.product.price}}</span>
+                                </ng-template>
+                            </ng-template>
+                        </div>
+                        <div class="btn-active">
+                            <a (click)="removeProductFromWishlist(wl.product.id)">Remove</a>
+                            <button (click)="moveToCart(wl.product.id)">MOVE TO CART</button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="wishlist-layout-sidebar col-4">
+
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #wishlistTemplate>
+        <div class="empty-wishlist">
+            <div class="icon">
+                <i class="fa-brands fa-openwishlist"></i>
+            </div>
+            <div class="text">
+                <h4>Your wishlist is empty.</h4>
+            </div>
+        </div>
+    </ng-template>
+</section>

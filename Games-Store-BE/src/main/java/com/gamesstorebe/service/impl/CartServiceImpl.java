@@ -74,7 +74,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart getCartById(int id) {
-        return cartRepository.findById(id).orElseThrow(null);
+    public CartDTO getCartById(int id) {
+        return cartRepository.findById(id).map(cart -> mapper.map(cart, CartDTO.class)).orElse(null);
+    }
+
+    @Override
+    public int getQuantityProductFromCart(String userEmail) {
+        return cartRepository.getQuantity(userEmail);
     }
 }
+    

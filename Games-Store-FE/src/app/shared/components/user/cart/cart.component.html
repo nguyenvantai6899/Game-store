@@ -1,4 +1,9 @@
 <section>
+    <!-- <app-toast [showToast]="toast" message="Remove success"></app-toast> -->
+    <ng-container *ngIf="cart?.id">
+        <app-checkout [cartId]="cart?.id" [(showCheckout)]="showCheckout"
+            (showCheckoutChange)="receiveMessage($event)"></app-checkout>
+    </ng-container>
     <h3>MY CART</h3>
     <ng-container *ngIf="cart?.products?.length; else cartTemplate">
         <div class="cart-container row">
@@ -27,8 +32,8 @@
                                 <ng-container *ngIf="product.discount?.status;else notDiscount">
                                     <span class="percent-discount">{{product.discount.percentDiscount}}%</span>
                                     <span style="text-decoration: line-through;color: #989898;">{{product.price}}</span>
-                                    <span>{{product.price * product.discount.percentDiscount / 100 |
-                                        number:'1.3-3'}}</span>
+                                    <span>{{product.price * (100 - product.discount.percentDiscount )/ 100 |
+                                        number:'1.2-2'}}</span>
                                     <p>Sale end {{product.discount.endDate | date}}</p>
                                 </ng-container>
                                 <ng-template #notDiscount>
@@ -37,13 +42,10 @@
                             </ng-template>
                         </div>
                         <div class="btn-active">
-                            <a (click)="removeProductFromCart(product.id)">Remove</a>
-                            <button>MOVE TO WISHLIST</button>
+                            <a (click)="removeProductFromCart(product.id)" (click)="showToast()">Remove</a>
                         </div>
                     </div>
-
                 </ng-container>
-
             </div>
 
             <div class="cart-layout-sidebar col-4">
@@ -51,18 +53,18 @@
                 <div class="product-price">
                     <div class="price d-flex justify-content-between">
                         <h6>Price</h6>
-                        <span>{{totalCart.price | number:'1.3-3'}}</span>
+                        <span>{{totalCart.price | number:'1.2-2'}}</span>
                     </div>
                     <div class="discount d-flex justify-content-between">
                         <h6>Sale Discount</h6>
-                        <span>{{totalCart.priceDiscount | number:'1.3-3'}}</span>
+                        <span>{{totalCart.priceDiscount | number:'1.2-2'}}</span>
                     </div>
                     <div class="subtotal d-flex justify-content-between">
                         <h6>Subtotal</h6>
-                        <span>{{totalCart.subTotal | number:'1.3-3'}}</span>
+                        <span>{{totalCart.subTotal | number:'1.2-2'}}</span>
                     </div>
                 </div>
-                <button class="checkout">
+                <button class="checkout" (click)="showCheckoutClick()">
                     CHECK OUT
                 </button>
             </div>

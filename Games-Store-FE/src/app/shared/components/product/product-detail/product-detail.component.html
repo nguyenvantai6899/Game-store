@@ -1,4 +1,9 @@
 <app-menu></app-menu>
+<!-- <app-toast [showToast]="toast" message="Add to cart success"></app-toast> -->
+<ng-container *ngIf="product?.id">
+    <app-checkout [productId]="product?.id" [showCheckout]="showCheckout"
+        (showCheckoutChange)="receiveMessage($event)"></app-checkout>
+</ng-container>
 <section>
     <div class="product-container">
         <div class="detail-info row">
@@ -36,7 +41,8 @@
                         <ng-container *ngIf="product?.categories">
                             <div class="categories">
                                 <h6 style="color: var(--color-primary-text-disabled)">Genders</h6>
-                                <p style="color: var(--color-primary-text-active)">{{product.categories.categoryName}}
+                                <p style="color: var(--color-primary-text-active)">
+                                    {{product.categories.categoryName}}
                                 </p>
                             </div>
                         </ng-container>
@@ -59,31 +65,46 @@
                     </ng-container>
                 </div>
                 <div class="price">
-                    <ng-template #price>
-                        <ng-container *ngIf="product.discount?.status;else notDiscount">
-                            <span class="percent-discount">{{product.discount.percentDiscount}}%</span>
-                            <span style="text-decoration: line-through;color: #989898;">{{product.price}}</span>
-                            <span>{{product.price * product.discount.percentDiscount / 100 | number:'1.3-3'}}</span>
-                        </ng-container>
-                        <ng-template #notDiscount>
-                            <span>{{product.price}}</span>
-                        </ng-template>
+                    <ng-container *ngIf="product?.discount;else notDiscount">
+                        <span class="percent-discount">{{product.discount.percentDiscount}} %</span>
+                        <span style="text-decoration: line-through;color: #989898;">{{product.price}}</span>
+                        <span>{{product.price *(100 - product.discount.percentDiscount) / 100 | number:'1.2-2'}}</span>
+                    </ng-container>
+                    <ng-template #notDiscount>
+                        <span>FREE</span>
                     </ng-template>
                 </div>
                 <div class="btn-toggle">
                     <ng-container *ngIf="product.price === 0;else elseTemplate">
                         <button>GET</button>
+                        <ng-container *ngIf="checkProductExistWishlist; else checkProductExistWishlistTemplate">
+                            <button [routerLink]="['/menu/wishlist']" class="cart">VIEW IN WISHLIST</button>
+                        </ng-container>
+                        <ng-template #checkProductExistWishlistTemplate>
+                            <button class="wishlist" (click)="addToWishlist(product.id)"><i
+                                    class="fa-solid fa-circle-plus"></i> ADD TO
+                                WISHLIST</button>
+                        </ng-template>
                     </ng-container>
                     <ng-template #elseTemplate>
-                        <button class="buy">BUY NOW</button>
-                        <ng-container *ngIf="!checkProductExist; else checkProductExist">
+                        <button class="buy" (click)="showCheckoutClick()">BUY NOW</button>
+                        <ng-container *ngIf="checkProductExist; else checkProductExistTemplate">
                             <button [routerLink]="['/menu/cart']" class="cart">VIEW IN CART</button>
                         </ng-container>
-                        <ng-template #checkProductExist>
-                            <button class="cart" (click)="addToCart(product.id)">ADD TO CART</button>
+                        <ng-template #checkProductExistTemplate>
+                            <button class="cart" (click)="showToast()" (click)="addToCart(product.id)">ADD TO
+                                CART</button>
+                        </ng-template>
+                        <ng-container *ngIf="checkProductExistWishlist; else checkProductExistWishlistTemplate">
+                            <button [routerLink]="['/menu/wishlist']" class="cart">VIEW IN WISHLIST</button>
+                        </ng-container>
+                        <ng-template #checkProductExistWishlistTemplate>
+                            <button class="wishlist" (click)="addToWishlist(product.id)"><i
+                                    class="fa-solid fa-circle-plus"></i> ADD TO
+                                WISHLIST</button>
                         </ng-template>
 
-                        <button class="wishlist"><i class="fa-solid fa-circle-plus"></i> ADD TO WISHLIST</button>
+
                     </ng-template>
                 </div>
                 <div class="info">

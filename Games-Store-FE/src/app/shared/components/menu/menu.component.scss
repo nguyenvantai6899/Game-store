@@ -58,4 +58,13 @@
   ul {
     margin-bottom: 0px;
   }
+  span {
+    margin-left: 5px;
+    border-radius: 5px;
+    background-color: var(--color-primary-text-active);
+    font-size: 14px;
+    padding: 1px 10px;
+    color: black;
+    font-weight: 600;
+  }
 }

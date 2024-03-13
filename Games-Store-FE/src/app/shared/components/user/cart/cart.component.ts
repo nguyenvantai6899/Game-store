@@ -10,6 +10,9 @@ import { CartService } from 'src/app/core/service/cart.service';
 })
 export class CartComponent {
   cart?: Cart;
+  toast: boolean = false;
+  showCheckout: boolean = false;
+
   totalCart = {
     price: 0,
     priceDiscount: 0,
@@ -28,7 +31,6 @@ export class CartComponent {
       (response: any) => {
         this.cart = response.data
         this.getTotalCart(this.cart);
-        console.log(this.totalCart);
 
       },
       (err: any) => {
@@ -45,18 +47,31 @@ export class CartComponent {
   removeProductFromCart(productID: number) {
     const email: any = localStorage.getItem('email');
     this.cartService.removeProductFromCart(email, productID).subscribe(
-      (response: any) => { },
+      (response: any) => {
+        this.cart = response.data;
+        this.cartService.updateCart();
+      },
       (err: any) => {
         console.error(err);
       }
     )
   }
 
+
   getTotalCart(cart: any) {
     cart.products.forEach((p: any) => {
       this.totalCart.price += p.price;
-      this.totalCart.priceDiscount += p.price * p.discount.percentDiscount / 100;
+      this.totalCart.priceDiscount += p.price * (100 - p.discount?.percentDiscount) / 100;
       this.totalCart.subTotal = this.totalCart.priceDiscount;
     })
+  }
+  showToast(): void {
+    this.toast = true;
+  }
+  showCheckoutClick() {
+    this.showCheckout = true;
+  }
+  receiveMessage(event: any) {
+    this.showCheckout = !event;
   }
 }

@@ -1,0 +1,146 @@
+<div class="checkout-container" *ngIf="showCheckout">
+    <div class="checkout-content row">
+        <div class="col-md-8 ">
+            <div class="card-title d-flex justify-content-between">
+                <span>CHECKOUT</span>
+                <span>{{email}}</span>
+            </div>
+            <div class="accordion" id="accordionExample">
+                <div class="card " [ngClass]="{'checked': selectedPaymentOption === 'paypal'}">
+                    <div class="card-header p-0" id="headingTwo">
+                        <h2 class="mb-0">
+                            <label class="btn  text-left border-bottom-custom d-flex">
+                                <input type="radio" name="payment_option" [value]="'paypal'"
+                                    [(ngModel)]="selectedPaymentOption"> Paypal
+                                <img src="https://i.imgur.com/7kQEsHU.png" width="30">
+                            </label>
+                        </h2>
+                    </div>
+                    <div class="card-body" *ngIf="selectedPaymentOption === 'paypal'">
+                        <input type="text" class="form-control" placeholder="Paypal email">
+                    </div>
+                </div>
+                <div class="card" [ngClass]="{'checked': selectedPaymentOption === 'credit_card'}">
+                    <div class="card-header p-0">
+                        <h2 class="mb-0">
+                            <label class="btn  text-left d-flex">
+                                <input type="radio" name="payment_option" id="credit_card_option" autocomplete="off"
+                                    [value]="'credit_card'" [(ngModel)]="selectedPaymentOption"> Credit card
+                                <div class="icons">
+                                    <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                    <img src="https://i.imgur.com/W1vtnOV.png" width="30">
+                                    <img src="https://i.imgur.com/35tC99g.png" width="30">
+                                    <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                </div>
+                            </label>
+                        </h2>
+                    </div>
+                    <div class="card-body payment-card-body" *ngIf="selectedPaymentOption === 'credit_card'">
+                        <span class="font-weight-normal card-text">Card Number</span>
+                        <div class="input">
+                            <i class="fa fa-credit-card"></i>
+                            <input type="text" class="form-control" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-md-6">
+                                <span class="font-weight-normal card-text">Expiry Date</span>
+                                <div class="input">
+                                    <i class="fa fa-calendar"></i>
+                                    <input type="text" class="form-control" placeholder="MM/YY">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="font-weight-normal card-text">CVC/CVV</span>
+                                <div class="input">
+                                    <i class="fa fa-lock"></i>
+                                    <input type="text" class="form-control" placeholder="000">
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-muted certificate-text mb-2">
+                            <i class="fa fa-lock"></i>&nbsp;
+                            Your transaction is secured with ssl certificate
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-title d-flex justify-content-between">
+                <span>ORDER SUMMARY</span>
+                <span><button type="button" class="btn-close" aria-label="Close"
+                        (click)="hideCheckout()"></button></span>
+            </div>
+            <div class="card">
+                <div class="scroll" *ngIf="products.length > 0">
+                    <ng-container *ngFor="let product of products">
+                        <div class="d-flex p-3">
+                            <div class="img me-3">
+                                <img [src]="product.productImages.imageAvatars[0].path" [alt]="product.name"
+                                    width="100%">
+                            </div>
+                            <div class="product-des">
+                                <h6>{{product.name}}</h6>
+                                <ng-container *ngIf="product?.discount; else discountTemplate">
+                                    <span>{{product.discount.percentDiscount}}%<br></span>
+                                    <span
+                                        style="text-decoration: line-through; color: rgba(20, 20, 20, 0.72);">{{product.price
+                                        }}</span>
+                                    <span>&nbsp;{{product.price * (100 - product.discount.percentDiscount) / 100
+                                        | number:'1.2-2'}}</span>
+                                </ng-container>
+                                <ng-template #discountTemplate>
+                                    <span>{{product.price}}</span>
+                                </ng-template>
+
+
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+                <hr class="mt-0 line">
+                <div class="p-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Price</span>
+                        <span>{{totalCart.price | number:'1.2-2'}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Sale Discount <i class="fa fa-clock-o"></i></span>
+                        <span>{{totalCart.priceDiscount | number:'1.2-2'}}</span>
+                    </div>
+                </div>
+                <hr class="mt-0 line">
+                <div class="p-3 d-flex justify-content-between">
+                    <div class="d-flex flex-column">
+                        <span>Total</span>
+                    </div>
+                    <span>{{totalCart.subTotal | number:'1.2-2'}}</span>
+                </div>
+                <hr class="mt-0 line">
+                <div class="p-3">
+                    <span>Payment Detail</span>
+                    <div class=" d-flex justify-content-between">
+                        <div class="d-flex flex-column">
+                            <ng-container *ngIf="selectedPaymentOption === 'paypal'; else elseTemplate">
+                                <span>Paypal</span>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <span>Credit Card</span>
+                            </ng-template>
+                        </div>
+                        <span>{{totalCart.subTotal | number:'1.2-2'}}</span>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <button class="btn btn-primary btn-block w-100 free-button">PLACE ORDER</button>
+                    <div class="text-center">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

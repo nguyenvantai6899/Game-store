@@ -34,4 +34,5 @@ public class CartController {
     public Result removeProductFromCart(@RequestParam("email") String email, @RequestParam("productId") int productId){
         return new Result(true, HttpStatus.OK, "Success",cartService.removeProductFromCart(productId, email));
     }
+
 }
