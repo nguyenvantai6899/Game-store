@@ -89,4 +89,17 @@ header {
   ul {
     margin-bottom: 0px;
   }
+  button {
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  .dropdown-menu {
+    background-color: #333;
+    color: var(--color-primary-text-active);
+    a:hover {
+      background-color: rgb(127, 131, 134);
+    }
+  }
 }

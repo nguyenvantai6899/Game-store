@@ -30,6 +30,10 @@ import { SearchByWatcherComponent } from './shared/components/product/search-by-
 import { ProductDetailComponent } from './shared/components/product/product-detail/product-detail.component';
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { CheckoutComponent } from './shared/components/user/checkout/checkout.component';
+import { AccountComponent } from './shared/components/user/account/account.component';
+import { AccountSettingComponent } from './shared/components/user/account/account-setting/account-setting.component';
+import { TransactionsComponent } from './shared/components/user/account/transactions/transactions.component';
+import { PasswordSecurityComponent } from './shared/components/user/account/password-security/password-security.component';
 
 
 @NgModule({
@@ -58,6 +62,10 @@ import { CheckoutComponent } from './shared/components/user/checkout/checkout.co
     ProductDetailComponent,
     ToastComponent,
     CheckoutComponent,
+    AccountComponent,
+    AccountSettingComponent,
+    TransactionsComponent,
+    PasswordSecurityComponent,
   ],
   imports: [
     BrowserModule,

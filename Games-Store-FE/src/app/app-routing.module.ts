@@ -13,6 +13,10 @@ import { LayoutComponent } from './shared/layout/layout.component';
 import { ProductComponent } from './shared/components/product/product.component';
 import { SignUpComponent } from './shared/authentication-form/sign-up/sign-up.component';
 import { ProductDetailComponent } from './shared/components/product/product-detail/product-detail.component';
+import { AccountComponent } from './shared/components/user/account/account.component';
+import { AccountSettingComponent } from './shared/components/user/account/account-setting/account-setting.component';
+import { PasswordSecurityComponent } from './shared/components/user/account/password-security/password-security.component';
+import { TransactionsComponent } from './shared/components/user/account/transactions/transactions.component';
 
 const routes: Routes = [
   {
@@ -33,6 +37,16 @@ const routes: Routes = [
       },
       { path: '', redirectTo: 'menu/discover', pathMatch: 'full' },
       { path: 'distribution', component: DistributionComponent },
+      {
+        path: 'account', component: AccountComponent,
+        children: [
+          { path: 'settings', component: AccountSettingComponent },
+          { path: 'password', component: PasswordSecurityComponent },
+          { path: 'transactions', component: TransactionsComponent },
+          { path: '', redirectTo: 'settings', pathMatch: 'full' }
+        ]
+      },
+
     ]
   },
   { path: 'login', component: SignInComponent },

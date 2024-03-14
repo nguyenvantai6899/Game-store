@@ -36,14 +36,24 @@
     </div>
     <div class="header-right">
         <div class="global-toolbar">
-            <div class="local-menu">Language</div>
-            <div class="local-menu" *ngIf="auth; else elseTemplate">
+            <div class="local-menu me-3"><i class="fa-solid fa-earth-asia"></i></div>
+            <div class="local-menu me-3" *ngIf="auth; else elseTemplate">
                 <a [routerLink]="['login']">Login</a>
             </div>
+            <button class="btn btn-primary">Download</button>
         </div>
     </div>
 
 </header>
 <ng-template #elseTemplate>
-    <a [routerLink]="['login']">Logout</a>
+    <div class="dropdown me-3">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="fa-regular fa-user"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" [routerLink]="['account']">Account</a></li>
+            <li><a class="dropdown-item">Logout</a></li>
+        </ul>
+    </div>
 </ng-template>

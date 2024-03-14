@@ -1,0 +1,17 @@
+<section>
+    <div class="account-container row">
+        <nav class="nav flex-column col-3">
+            <a class="nav-link active" aria-current="page" [routerLinkActive]="['active-link']"
+                [routerLink]="'/account/settings'"><i class="fa-solid fa-user"></i> ACCOUNT SETTINGS</a>
+            <a class="nav-link" [routerLink]="'/account/transactions'" [routerLinkActive]="['active-link']"><i
+                    class="fa-solid fa-left-right"></i>
+                TRANSACTIONS</a>
+            <a class="nav-link" [routerLink]="'/account/password'" [routerLinkActive]="['active-link']"><i
+                    class="fa-solid fa-lock"></i> PASSWORD &
+                SECURITY</a>
+        </nav>
+        <div class="tab-content col-9">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</section>

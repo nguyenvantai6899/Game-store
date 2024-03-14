@@ -1,0 +1,24 @@
+section {
+  background-color: #f8f8f8;
+  .account-container {
+    background-color: white;
+    .active-link {
+      background-color: rgb(242, 242, 242);
+    }
+    .nav {
+      a {
+        padding: 20px 0px;
+        font-size: 12px;
+        font-weight: 700;
+        color: black;
+        i {
+          margin-right: 10px;
+          margin-left: 20px;
+        }
+      }
+    }
+    .tab-content {
+      padding: 40px;
+    }
+  }
+}
