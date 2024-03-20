@@ -1,5 +1,6 @@
 package com.gamesstorebe.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -21,6 +22,7 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     private String email;
+    @JsonBackReference
     private String password;
     private String firstName;
     private String lastName;

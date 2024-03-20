@@ -23,7 +23,7 @@ public class Cart {
     @JsonBackReference
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name = "product_cart",
             joinColumns = @JoinColumn(name = "cart_id"),

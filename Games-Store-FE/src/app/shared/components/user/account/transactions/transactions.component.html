@@ -12,17 +12,66 @@
                     <th scope="col">Price</th>
                     <th scope="col">Marketplace</th>
                     <th scope="col">Status</th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Epic</td>
-                    <td>1</td>
-                </tr>
-            </tbody>
+            <ng-container *ngFor="let transaction of transactions; index as i">
+                <tbody>
+                    <tr>
+                        <td>
+                            {{ transaction.paymentDate | date }}
+                        </td>
+                        <td>
+                            <ng-container *ngIf="transaction.productCheckout.length > 1; else showProductTemplate">
+                                {{ transaction.productCheckout[0].name}} <span class="fw-bold">and
+                                    {{transaction.productCheckout.length
+                                    -1}} more</span>
+                            </ng-container>
+                            <ng-template #showProductTemplate>
+                                {{transaction.productCheckout[0].name}}
+                            </ng-template>
+                        </td>
+                        <td>{{transaction.amount}}</td>
+                        <td>{{transaction.paymentMethod}}</td>
+                        <ng-container *ngIf="transaction.status; else transactionTemplate">
+                            <td>Purchased</td>
+                        </ng-container>
+                        <ng-template #transactionTemplate>
+                            <td>Wait for purchase</td>
+                        </ng-template>
+                        <ng-container *ngIf="transaction.productCheckout.length > 1">
+                            <td>
+                                <button class="btn" (click)="toggleClick(i)">
+                                    <i class="fa-solid fa-sort-down"></i>
+                                </button>
+                            </td>
+                        </ng-container>
+                    </tr>
+                    <ng-container *ngFor="let product of transaction.productCheckout">
+                        <tr [ngClass]="{'active': toggleStates[i]}">
+                            <td></td>
+                            <td>
+                                {{product.name}}
+                            </td>
+                            <td>{{product.price}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </ng-container>
+                    <tr [ngClass]="{'active': toggleStates[i]}">
+                        <td></td>
+                        <td class="fw-bold">
+                            Total
+                        </td>
+                        <td>{{transaction.amount}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </ng-container>
+
         </table>
     </div>
 </div>

@@ -78,6 +78,9 @@ public class SecurityConfig {
                         .requestMatchers("/file/**").permitAll()
                         .requestMatchers("/cart/**").permitAll()
                         .requestMatchers("/wishlist/**").permitAll()
+                        .requestMatchers("/account/**").permitAll()
+                        .requestMatchers("/checkout/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
 
@@ -114,12 +117,17 @@ public class SecurityConfig {
         jwtConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
         return jwtConverter;
     }
+    @Bean
     CorsConfigurationSource apiConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATH"));
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Content-Type", "content-type"));
+        configuration.setAllowCredentials(false); // Disable credentials
+        configuration.setMaxAge(3600L); // Set max age to 3600 seconds
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 }

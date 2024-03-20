@@ -1,9 +1,6 @@
 package com.gamesstorebe.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
@@ -32,13 +29,17 @@ public class Product {
     private int downloads;
 
     @OneToOne(mappedBy = "product")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private ProductImage productImages;
 
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JoinColumn(name = "categories_id")
     private Categories categories;
 
     @ManyToMany
+    @JsonBackReference
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JoinTable(
             name = "products_featured",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -47,15 +48,23 @@ public class Product {
     private List<Features> productsFeatures;
 
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JoinColumn(name = "developer_id")
     private Developers developer;
 
 
     @OneToOne(mappedBy = "product")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonBackReference
     private ProductDiscount productDiscount;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "products")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonBackReference
     private List<Cart> carts;
+
+    @ManyToMany(mappedBy = "productCheckout")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonBackReference
+    private List<Checkout> checkouts;
 }

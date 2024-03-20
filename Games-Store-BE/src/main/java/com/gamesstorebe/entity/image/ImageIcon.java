@@ -23,7 +23,6 @@ public class ImageIcon {
 
     @ManyToOne
     @JsonBackReference
-
     private ProductImage productImages;
     public String getPath() {
         return "http://localhost:8888/api/v1/file/image/icon/" + name;

@@ -9,6 +9,14 @@
     tbody td {
       padding: 25px 20px;
       background-color: white;
+      font-size: smaller;
+    }
+    tbody {
+      position: relative;
     }
   }
+}
+
+.active {
+  display: none;
 }

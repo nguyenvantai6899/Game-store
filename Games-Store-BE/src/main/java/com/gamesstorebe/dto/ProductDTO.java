@@ -1,9 +1,7 @@
 package com.gamesstorebe.dto;
 
 import com.gamesstorebe.entity.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 

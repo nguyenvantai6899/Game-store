@@ -49,7 +49,7 @@ const routes: Routes = [
 
     ]
   },
-  { path: 'login', component: SignInComponent },
+  { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'support', component: SupportComponent },
   {

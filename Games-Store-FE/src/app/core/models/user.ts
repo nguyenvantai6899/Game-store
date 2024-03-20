@@ -13,3 +13,12 @@ export interface Role {
     id: number;
     role: string;
 }
+
+export interface UserDTO {
+    email: string;
+    firstName: string;
+    lastName: string;
+    DOB: string;
+    address: string;
+    phoneNumber: string;
+}

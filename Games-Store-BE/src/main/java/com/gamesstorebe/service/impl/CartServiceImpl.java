@@ -66,6 +66,15 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public Cart removeALlProductFromCart(String email) {
+        Cart cart = cartRepository.findCartByUser(email);
+        List<Product> products = new ArrayList<>();
+        cart.setProducts(products);
+        cartRepository.save(cart);
+        return cart;
+    }
+
+    @Override
     public void addCartByUser(String email) {
         Cart cart = new Cart();
         User user = userRepository.findByEmail(email).orElseThrow(null);
