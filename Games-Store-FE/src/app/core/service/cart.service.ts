@@ -30,6 +30,9 @@ export class CartService {
 
         return this.httpClient.delete(API + "/cart/remove-product-from-cart?email=" + email + "&productId=" + productId);
     }
+    removeAllProductFromCart(email: any): Observable<any> {
+        return this.httpClient.delete(API + "/cart/remove-all-product-from-cart?email=" + email);
+    }
     getCartById(id: number): Observable<any> {
         return this.httpClient.get(API + "/cart/get-cart-by-id?id=" + id);
     }

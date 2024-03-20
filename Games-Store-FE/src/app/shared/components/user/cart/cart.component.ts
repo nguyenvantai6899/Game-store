@@ -38,6 +38,15 @@ export class CartComponent {
 
       }
     )
+    this.cartService.cartChanged.subscribe(
+      (cart) => {
+        this.getCart(email).subscribe(
+          (response: any) => {
+            this.cart = response.data;
+          }
+        )
+      }
+    )
   }
 
   getCart(email: any): Observable<Cart> {
